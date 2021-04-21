@@ -1,42 +1,43 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import React from 'react';
+import { Flex, Box } from '@semcore/flex-box';
+import Link from '@semcore/link';
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
+const Header = ({ data }) => {
+  const { tel, description, fullName, location } = data;
+  return (
+    <Flex
+      px={3}
+      h="80px"
+      alignItems="center"
+      justifyContent="space-between"
       style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
+        backgroundColor: '#fff',
+        color: '#000',
+        boxShadow: 'rgb(0 0 0 / 10%) 0px 2px 16px 0px',
       }}
     >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+      <Flex direction="column">
+        <Box>{fullName}</Box>
+        <Box>{`${description} в городе ${location}`}</Box>
+      </Flex>
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
+      <Box tag="nav">
+        {[
+          { title: 'Услуги', href: '/services' },
+          { title: 'Гонорар', href: '/fee' },
+          { title: 'Контакты', href: '/contacts' },
+        ].map((item) => (
+          <Link px={4} key={item.title} href={item.href}>
+            {item.title}
+          </Link>
+        ))}
+      </Box>
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
+      <Link tag="a" href={`tel:${tel}`}>
+        {tel}
+      </Link>
+    </Flex>
+  );
+};
 
-export default Header
+export default Header;
