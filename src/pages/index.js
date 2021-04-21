@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { Flex, Box } from '@semcore/flex-box';
 import { Text } from '@semcore/typography';
 import Accordion from '@semcore/accordion';
-import { StaticImage } from 'gatsby-plugin-image';
+import { StaticImage, GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import Layout from '../components/layout';
 import Seo from '../components/seo';
@@ -14,12 +14,33 @@ const IndexPage = () => {
     query Site {
       contentfulKulazhenkoSite {
         title
+        description {
+          description
+        }
+        childContentfulKulazhenkoSiteLawyerJsonNode {
+          fullName
+          description
+        }
+        fee {
+          fee
+        }
       }
       allContentfulKulazhenkoSiteServices {
         nodes {
           title
           description {
             description
+          }
+        }
+      }
+      allContentfulKulazhenkoSiteAdvantages {
+        nodes {
+          title
+          desctiption {
+            desctiption
+          }
+          icon {
+            gatsbyImageData
           }
         }
       }
@@ -68,7 +89,7 @@ const IndexPage = () => {
         </Text>
 
         <Box
-          w="600px"
+          wMax="600px"
           style={{
             borderBottom: '1px solid #eeeeee',
           }}
@@ -129,6 +150,133 @@ const IndexPage = () => {
             ))}
           </Accordion>
         </Box>
+      </Flex>
+
+      {/* Fee */}
+      <Flex
+        id="fee"
+        className="container-x bg-shadow"
+        py="calc(70vh / 2)"
+        w="100%"
+        alignItems="center"
+        direction="column"
+        style={{
+          textAlign: 'center',
+          backgroundImage:
+            'url("https://static.tildacdn.com/tild3431-3838-4065-a662-613238616434/pexelsphoto510391.jpeg")',
+        }}
+      >
+        <Box zIndex={1}>
+          <Text tag="h2" mb={3} color="white" size={800} bold>
+            Гонорар
+          </Text>
+          <Text color="white" size={400} wMax="800px">
+            {data.contentfulKulazhenkoSite.fee.fee}
+          </Text>
+        </Box>
+      </Flex>
+
+      {/* Advantages */}
+      <Flex
+        className="container-x container-y"
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Text tag="h2" mt={10}>
+          Мои преимущества
+        </Text>
+
+        {data.allContentfulKulazhenkoSiteAdvantages.nodes.map((item) => (
+          <Flex
+            direction="column"
+            key={item.title}
+            alignItems="center"
+            mt={10}
+            wMax="800px"
+          >
+            <Box
+              w="100px"
+              h="100px"
+              style={{ borderRadius: '50%', overflow: 'hidden' }}
+            >
+              <GatsbyImage
+                image={getImage(item.icon.gatsbyImageData)}
+                alt={item.title}
+              />
+            </Box>
+            <Text size={400} my={3} bold>
+              {item.title}
+            </Text>
+            <Text size={300}>{item.desctiption?.desctiption}</Text>
+          </Flex>
+        ))}
+      </Flex>
+
+      {/* Block */}
+      <Flex
+        id="fee"
+        className="container-x"
+        py="calc(70vh / 2)"
+        w="100%"
+        style={{
+          backgroundSize: 'cover',
+          backgroundImage:
+            'url("https://static.tildacdn.com/tild3230-6465-4433-b132-336232323739/pexelsphoto29642.jpg")',
+        }}
+      >
+        <Flex
+          w="calc(100% + 40px)"
+          m="0 -20px"
+          justifyContent="center"
+          style={{
+            backgroundColor: '#000',
+          }}
+        >
+          <Flex
+            py={10}
+            wMax="800px"
+            alignItems="center"
+            direction="column"
+            style={{
+              textAlign: 'center',
+              color: '#fff',
+              fontSize: '20px',
+            }}
+          >
+            <Text size={500} bold>
+              {
+                data.contentfulKulazhenkoSite
+                  .childContentfulKulazhenkoSiteLawyerJsonNode.fullName
+              }
+            </Text>
+            <Text size={300} mt={2} mb={5}>
+              {
+                data.contentfulKulazhenkoSite
+                  .childContentfulKulazhenkoSiteLawyerJsonNode.description
+              }
+            </Text>
+            <Text size={400}>
+              {data.contentfulKulazhenkoSite.description.description}
+            </Text>
+          </Flex>
+        </Flex>
+      </Flex>
+
+      {/* Form */}
+      <Flex
+        className="container-x container-y"
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Text tag="h2" mt={10}>
+          Отправить запрос и получить консультацию
+        </Text>
+
+        <Text size={500} mt={10}>
+          Ваше обращение полностью конфиденциально
+        </Text>
       </Flex>
     </Layout>
   );
