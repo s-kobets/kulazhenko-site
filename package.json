@@ -23,6 +23,9 @@
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
+    "@semcore/shadow-loader": "^1.0.4",
+    "css-loader": "^5.2.4",
+    "mini-css-extract-plugin": "^1.3.9",
     "prettier": "2.2.1"
   },
   "keywords": [
