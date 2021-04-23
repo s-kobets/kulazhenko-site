@@ -1,9 +1,10 @@
 import * as React from 'react';
-// import { Link } from 'gatsby';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Flex, Box } from '@semcore/flex-box';
 import { Text } from '@semcore/typography';
 import Accordion from '@semcore/accordion';
+import Link from '@semcore/link';
+import Form from '../components/form';
 import { StaticImage, GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import Layout from '../components/layout';
@@ -19,6 +20,9 @@ const IndexPage = () => {
         }
         childContentfulKulazhenkoSiteLawyerJsonNode {
           fullName
+          email
+          skype
+          tel
           description
         }
         fee {
@@ -46,6 +50,9 @@ const IndexPage = () => {
       }
     }
   `);
+
+  const lawyer =
+    data.contentfulKulazhenkoSite.childContentfulKulazhenkoSiteLawyerJsonNode;
 
   return (
     <Layout>
@@ -245,16 +252,10 @@ const IndexPage = () => {
             }}
           >
             <Text size={500} bold>
-              {
-                data.contentfulKulazhenkoSite
-                  .childContentfulKulazhenkoSiteLawyerJsonNode.fullName
-              }
+              {lawyer.fullName}
             </Text>
             <Text size={300} mt={2} mb={5}>
-              {
-                data.contentfulKulazhenkoSite
-                  .childContentfulKulazhenkoSiteLawyerJsonNode.description
-              }
+              {lawyer.description}
             </Text>
             <Text size={400}>
               {data.contentfulKulazhenkoSite.description.description}
@@ -264,19 +265,57 @@ const IndexPage = () => {
       </Flex>
 
       {/* Form */}
-      <Flex
-        className="container-x container-y"
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Text tag="h2" mt={10}>
-          Отправить запрос и получить консультацию
-        </Text>
+      <Form />
 
-        <Text size={500} mt={10}>
-          Ваше обращение полностью конфиденциально
-        </Text>
+      {/* Footer */}
+      <Flex>
+        <Box
+          mb={0}
+          w="50%"
+          tag="iframe"
+          src="https://yandex.ru/map-widget/v1/?um=constructor%3A86509c5e003e91f40711b96e38b482d83c20e0a750175436c1f5f7d827e30888&amp;source=constructor"
+          height="400px"
+          frameborder="0"
+        />
+        <Flex
+          direction="column"
+          w="50%"
+          p={10}
+          style={{ backgroundColor: '#303030', color: '#fff' }}
+        >
+          <Text size={400} bold mb={2}>
+            {lawyer.fullName}
+          </Text>
+          <Text>
+            Моб.:{' '}
+            <Link color="orange" href={`tel:${lawyer.tel}`}>
+              {lawyer.tel}
+            </Link>
+          </Text>
+          <Text>
+            Viber:{' '}
+            <Link color="orange" href={`viber:${lawyer.tel}`}>
+              {lawyer.tel}
+            </Link>
+          </Text>
+          <Text>
+            E-mail:{' '}
+            <Link color="orange" href={`mailto:${lawyer.email}`}>
+              {lawyer.email}
+            </Link>
+          </Text>
+          <Text>
+            Skype:{' '}
+            <Link color="orange" href={`skype:${lawyer.skype}`}>
+              {lawyer.skype}
+            </Link>
+          </Text>
+          <Text size={100} mt={4}>
+            Если Ваш телефонный звонок остался без ответа, то это значит, что я
+            занят, и при возможности сразу же Вам перезвоню.
+            <br /> P.S. Если же я Вам не перезвонил, наберите мой номер еще раз.
+          </Text>
+        </Flex>
       </Flex>
     </Layout>
   );
