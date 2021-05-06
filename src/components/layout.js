@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import Header from './header';
+import Breakpoints from '@semcore/breakpoints';
 import './layout.css';
 
 const Layout = ({ children }) => {
@@ -32,7 +33,7 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <>
+    <Breakpoints>
       <Header data={dataHeader} />
       {children}
       {/* <footer
@@ -44,7 +45,7 @@ const Layout = ({ children }) => {
           {` `}
           <a href="https://www.gatsbyjs.com">Gatsby</a>
         </footer> */}
-    </>
+    </Breakpoints>
   );
 };
 

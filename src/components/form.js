@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import { useForm } from 'react-hook-form';
@@ -8,9 +8,11 @@ import Input from '@semcore/input';
 import Button from '@semcore/button';
 import Textarea from '@semcore/textarea';
 import { Text } from '@semcore/typography';
+import Breakpoints from '@semcore/breakpoints';
 
 const Form = () => {
-  const { TELEGRAM_TOKEN, TELEGRAM_CHAT_ID } = useStaticQuery(graphql`
+  const index = useContext(Breakpoints.Context);
+  const data = useStaticQuery(graphql`
     query Form {
       site {
         siteMetadata {
@@ -20,6 +22,7 @@ const Form = () => {
       }
     }
   `);
+  const { TELEGRAM_TOKEN, TELEGRAM_CHAT_ID } = data.site.siteMetadata;
 
   const { register, handleSubmit, errors, reset } = useForm({
     mode: 'onBlur',
@@ -31,6 +34,9 @@ const Form = () => {
     try {
       await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
         method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
         body: JSON.stringify({
           chat_id: TELEGRAM_CHAT_ID,
           text: JSON.stringify(data),
@@ -75,7 +81,7 @@ const Form = () => {
           <Tooltip
             size="xl"
             interaction={errors['email'] ? 'focus' : 'none'}
-            placement="right"
+            placement={['right', 'top'][index]}
             theme="warning"
             title={errors['email']?.message}
             tag={Input}

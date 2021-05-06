@@ -590,15 +590,10 @@ pre tt:before,
 pre tt:after {
   content: '';
 }
-@media only screen and (max-width: 480px) {
+@media (max-width: 480px) {
   html {
     font-size: 100%;
   }
-}
-
-.container-y {
-  padding-top: 120px;
-  padding-bottom: 120px;
 }
 
 .container-x {
@@ -625,10 +620,18 @@ pre tt:after {
   .is_mobile {
     display: none;
   }
+  .container-y {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
 }
 
 @media (max-width: 768px) {
   .is_desktop {
     display: none;
+  }
+  .container-y {
+    padding-top: 80px;
+    padding-bottom: 80px;
   }
 }
