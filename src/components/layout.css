@@ -620,3 +620,15 @@ pre tt:after {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+@media (min-width: 769px) {
+  .is_mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .is_desktop {
+    display: none;
+  }
+}

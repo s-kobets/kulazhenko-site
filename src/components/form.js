@@ -1,4 +1,6 @@
 import React from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
+
 import { useForm } from 'react-hook-form';
 import { Flex } from '@semcore/flex-box';
 import Tooltip from '@semcore/tooltip';
@@ -8,17 +10,36 @@ import Textarea from '@semcore/textarea';
 import { Text } from '@semcore/typography';
 
 const Form = () => {
+  const { TELEGRAM_TOKEN, TELEGRAM_CHAT_ID } = useStaticQuery(graphql`
+    query Form {
+      site {
+        siteMetadata {
+          TELEGRAM_TOKEN
+          TELEGRAM_CHAT_ID
+        }
+      }
+    }
+  `);
+
   const { register, handleSubmit, errors, reset } = useForm({
     mode: 'onBlur',
     shouldFocusError: false,
   });
 
-  const onSubmit = (data, e) => {
+  const onSubmit = async (data, e) => {
     reset({ email: '', name: '', trable: '' });
-    alert(JSON.stringify(data));
+    try {
+      await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+        method: 'POST',
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: JSON.stringify(data),
+        }),
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
-
-  console.log(123, errors);
 
   return (
     <>
@@ -41,7 +62,9 @@ const Form = () => {
           tag="form"
           action=""
           mt={5}
-          w="600px"
+          wMax="600px"
+          w="100%"
+          wMin="320px"
           direction="column"
           onSubmit={handleSubmit(onSubmit)}
         >
