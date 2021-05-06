@@ -5,8 +5,8 @@ module.exports = {
     title: `Site of laywer`,
     description: `My first site for laywer`,
     author: `@kulazhenko`,
-    TELEGRAM_TOKEN: process.env.TELEGRAM_TOKEN,
-    TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID,
+    TELEGRAM_TOKEN: `${process.env.TELEGRAM_TOKEN}`,
+    TELEGRAM_CHAT_ID: `${process.env.TELEGRAM_CHAT_ID}`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
