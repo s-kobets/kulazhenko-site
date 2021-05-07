@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Flex, Box } from '@semcore/flex-box';
 import Link from '@semcore/link';
 import Button from '@semcore/button';
@@ -15,12 +15,26 @@ const Navigation = [
   { title: 'Гонорар', href: '#fee' },
   { title: 'Контакты', href: '#contacts' },
 ];
+
 const Header = ({ data }) => {
   const [visible, setVisible] = useState(false);
   const index = useContext(Breakpoints.Context);
   const { tel, description, fullName, location } = data;
+  const onVisiblePanel = (visible) => {
+    setVisible(visible);
+  };
+
+  const openSidePanel = (e) => {
+    e.preventDefault();
+    onVisiblePanel(true);
+  };
+
+  const closeSidePanel = () => {
+    onVisiblePanel(false);
+  };
 
   const isDesktop = index === 0;
+
   return (
     <>
       <Sticky zIndex={2}>
@@ -53,7 +67,7 @@ const Header = ({ data }) => {
           )}
 
           {!isDesktop && (
-            <Button size="xl" onClick={() => setVisible(true)}>
+            <Button size="xl" onClick={openSidePanel}>
               <Button.Addon tag={HamburgerM} />
             </Button>
           )}
@@ -63,17 +77,13 @@ const Header = ({ data }) => {
           </Link>
         </Flex>
       </Sticky>
-      <SidePanel
-        placement="left"
-        visible={visible}
-        onClose={() => setVisible(false)}
-      >
+      <SidePanel placement="left" visible={visible} onClose={closeSidePanel}>
         <Flex direction="column">
           <Text size={400} bold>
             {fullName}
           </Text>
         </Flex>
-        <List size={400} mt={5} marker={null}>
+        <List size={400} mt={5} marker={null} onClick={closeSidePanel}>
           {Navigation.map((item, ind) => (
             <>
               <List.Item>
