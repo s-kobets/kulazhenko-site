@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Flex, Box } from '@semcore/flex-box';
 import Link from '@semcore/link';
 import Button from '@semcore/button';

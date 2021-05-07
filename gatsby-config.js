@@ -2,6 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
+    siteUrl: 'https://kulazhenko.by',
     author: `@kulazhenko`,
     TELEGRAM_TOKEN: `${process.env.TELEGRAM_TOKEN}`,
     TELEGRAM_CHAT_ID: `${process.env.TELEGRAM_CHAT_ID}`,
@@ -41,6 +42,12 @@ module.exports = {
     `gatsby-plugin-gatsby-cloud`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
   ],
 };
