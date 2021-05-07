@@ -31,21 +31,21 @@ const Form = () => {
 
   const onSubmit = async (data, e) => {
     reset({ email: '', name: '', trable: '' });
-    try {
-      await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: JSON.stringify(data),
-        }),
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+    //     method: 'POST',
+    //     mode: 'no-cors',
+    //     headers: {
+    //       'Content-Type': 'application/x-www-form-urlencoded',
+    //     },
+    //     body: JSON.stringify({
+    //       chat_id: TELEGRAM_CHAT_ID,
+    //       text: JSON.stringify(data),
+    //     }),
+    //   });
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   return (

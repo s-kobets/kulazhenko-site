@@ -347,7 +347,6 @@ const IndexPage = (props) => {
       unsubscribe();
     };
   }, []);
-  console.log(123, index);
 
   return <IndexInnerPage {...props} index={index} />;
 };
