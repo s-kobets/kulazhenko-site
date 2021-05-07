@@ -34,8 +34,9 @@ const Form = () => {
     try {
       await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify({
           chat_id: TELEGRAM_CHAT_ID,
@@ -66,7 +67,10 @@ const Form = () => {
 
         <Flex
           tag="form"
-          action=""
+          method="post"
+          netlify-honeypot="bot-field"
+          data-netlify="true"
+          name="contact"
           mt={5}
           wMax="600px"
           w="100%"
@@ -74,6 +78,8 @@ const Form = () => {
           direction="column"
           onSubmit={handleSubmit(onSubmit)}
         >
+          <input type="hidden" name="bot-field" />
+          <input type="hidden" name="form-name" value="contact" />
           <Text size={300} tag="label" mt={5} mb={1} htmlFor="email">
             E-mail или телефон
           </Text>

@@ -624,13 +624,18 @@ pre tt:after {
     padding-top: 120px;
     padding-bottom: 120px;
   }
+  .image-block {
+    padding-top: calc(70vh / 2);
+    padding-bottom: calc(70vh / 2);
+  }
 }
 
 @media (max-width: 768px) {
   .is_desktop {
     display: none;
   }
-  .container-y {
+  .container-y,
+  .image-block {
     padding-top: 80px;
     padding-bottom: 80px;
   }

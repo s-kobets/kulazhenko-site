@@ -57,15 +57,12 @@ const IndexInnerPage = ({ index }) => {
   const lawyer =
     data.contentfulKulazhenkoSite.childContentfulKulazhenkoSiteLawyerJsonNode;
 
-  const paddingImageBlock = ['calc(70vh / 2)', 20][index];
-
   return (
     <Layout>
       <Seo title="Home" />
 
       <Flex
-        className="container-x"
-        py={paddingImageBlock}
+        className="container-x image-block"
         w="100%"
         style={{
           textAlign: 'center',
@@ -167,8 +164,7 @@ const IndexInnerPage = ({ index }) => {
       {/* Fee */}
       <Flex
         id="fee"
-        className="container-x bg-shadow"
-        py={paddingImageBlock}
+        className="container-x bg-shadow image-block"
         w="100%"
         alignItems="center"
         direction="column"
@@ -237,8 +233,7 @@ const IndexInnerPage = ({ index }) => {
       {/* Block */}
       <Flex
         id="fee"
-        className="container-x"
-        py={paddingImageBlock}
+        className="container-x image-block"
         w="100%"
         style={{
           backgroundSize: 'cover',
@@ -352,6 +347,7 @@ const IndexPage = (props) => {
       unsubscribe();
     };
   }, []);
+  console.log(123, index);
 
   return <IndexInnerPage {...props} index={index} />;
 };

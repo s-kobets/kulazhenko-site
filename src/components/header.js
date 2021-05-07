@@ -23,7 +23,7 @@ const Header = ({ data }) => {
   const isDesktop = index === 0;
   return (
     <>
-      <Sticky zIndex={1}>
+      <Sticky zIndex={2}>
         <Flex
           className="container-x"
           h="80px"
