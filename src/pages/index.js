@@ -272,9 +272,6 @@ const IndexInnerPage = ({ index }) => {
             <Text size={300} mt={2} mb={5}>
               {lawyer.description}
             </Text>
-            <Text size={400}>
-              {data.contentfulKulazhenkoSite.description.description}
-            </Text>
           </Flex>
         </Flex>
       </Flex>
