@@ -85,7 +85,7 @@ const Form = () => {
           </Text>
 
           <Tooltip
-            size="xl"
+            size="l"
             interaction={errors['email'] ? 'focus' : 'none'}
             placement={['right', 'top'][index]}
             theme="warning"
@@ -103,17 +103,17 @@ const Form = () => {
           <Text size={300} tag="label" mt={10} mb={1} htmlFor="name">
             Ваше имя
           </Text>
-          <Input size="xl">
+          <Input size="l">
             <Input.Value name="name" id="name" ref={register} />
           </Input>
 
           <Text size={300} tag="label" mt={10} mb={1} htmlFor="trable">
             Ваша проблема
           </Text>
-          <Textarea id="trable" name="trable" size="xl" ref={register} />
+          <Textarea id="trable" name="trable" size="l" rows={5} ref={register} />
           <Button
             type="submit"
-            size="xl"
+            size="l"
             use="primary"
             theme="info"
             mt={10}
