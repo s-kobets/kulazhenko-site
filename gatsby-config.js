@@ -1,4 +1,8 @@
-require('dotenv').config();
+require("dotenv").config()
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 
 module.exports = {
   siteMetadata: {
@@ -35,15 +39,11 @@ module.exports = {
     {
       resolve: `gatsby-source-contentful`,
       options: {
+        downloadLocal: true,
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        host: process.env.CONTENTFUL_HOST,
       },
-    },
-    `gatsby-plugin-gatsby-cloud`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    'gatsby-plugin-offline',
-    'gatsby-plugin-sitemap',
-    'gatsby-plugin-robots-txt',
+    }
   ],
 };
